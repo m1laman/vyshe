@@ -1,0 +1,228 @@
+/* Shared navigation and readable typography, on every generated page. */
+:root {
+  --reading-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --muted: #52675e;
+}
+body { font-family: var(--reading-font); font-size: 16px; line-height: 1.65; }
+header { height: 88px; gap: 24px; }
+header > nav { height: 100%; gap: 24px; font-size: 15px; line-height: 1.4; }
+header > nav > a { display: flex; align-items: center; min-height: 44px; }
+.header-call { font-size: 14px; padding: 12px 20px; white-space: nowrap; }
+.menu-btn { min-width: 44px; min-height: 44px; }
+.demo-banner, .demo-banner span { font-size: 11px; line-height: 1.5; }
+.demo-banner { letter-spacing: .5px; }
+h1, h2, h3 { letter-spacing: -.025em; word-spacing: normal; }
+.hero h1 { font-weight: 600; font-size: clamp(44px, 4.5vw, 68px); letter-spacing: -.03em; line-height: 1.12; }
+.hero h1 em { font-weight: 600; }
+.page-title h1 { letter-spacing: -.03em; font-weight: 600; line-height: 1.15; }
+h2 { font-weight: 600; letter-spacing: -.025em; line-height: 1.2; }
+h3 { font-size: 20px; letter-spacing: -.015em; line-height: 1.4; }
+main p, .service-description ol, .category-hero p, .page-title > p,
+.story-grid p, .contact-card p, .info-grid p, .service-aside > p,
+.service-description p, .hero p, .promo p, .quiz-banner p, details p {
+  font-size: 16px; line-height: 1.75;
+}
+.hero p { font-size: 18px; }
+.eyebrow, .hero .eyebrow { font-size: 12px; letter-spacing: 1.1px; line-height: 1.5; }
+.btn, .secondary, .text-link, .section-head .text-link { font-size: 15px; }
+.btn, .secondary { min-height: 50px; }
+.trustbar { font-size: 14px; }
+.hero-bottom { font-size: 12px; letter-spacing: .8px; }
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.category {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.category-photo {
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
+  background: var(--pale);
+}
+.category-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.category-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 18px 18px 15px;
+}
+.category h3 { margin: 0 0 8px; font-size: 19px; line-height: 1.25; }
+.category p { flex: 1; margin: 0 0 16px; color: var(--muted); font-size: 14px; line-height: 1.55; }
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.category-count {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--pale);
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 700;
+}
+.category-arrow {
+  display: grid;
+  flex: 0 0 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--teal);
+  font-size: 17px;
+  line-height: 1;
+}
+.category:focus-visible .category-arrow, .category:hover .category-arrow {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+}
+.price-rows > a { font-size: 16px; line-height: 1.6; }
+.price-rows b { font-size: 18px; }
+.price-rows small { font-size: 14px; }
+.fine, main .fine, .service-aside .fine { font-size: 13px; line-height: 1.75; }
+.project p, .team-grid p { font-size: 14px; line-height: 1.65; }
+.team-grid h3 { font-size: 21px; }
+.project-img > span { font-size: 12px; }
+summary { font-size: 16px; min-height: 54px; line-height: 1.5; }
+.crumb, .search, .filter-tabs button, .service-aside .text-link { font-size: 14px; }
+.filter-tabs button { min-height: 44px; }
+.search input, #quiz input:not([type=checkbox]), #quiz select, #quiz textarea { font-size: 16px; }
+.muted, #quiz label, legend { font-size: 14px; line-height: 1.6; }
+.large-price { letter-spacing: -.025em; }
+.large-price small { font-size: 16px; }
+.contact-strip p { font-size: 16px; line-height: 1.75; }
+footer { font-size: 14px; line-height: 1.65; }
+footer b { font-size: 15px; }
+footer small { font-size: 13px; }
+footer > div > a:not(.brand) { margin: 10px 0; }
+.sitemap { font-size: 15px; }
+.portrait { background-size: 300% auto; background-position-y: 0; }
+
+/* The dropdown is attached to the full header; there is no hover gap. */
+.services-nav { display: flex; align-items: center; height: 100%; }
+.services-link { display: flex; align-items: center; min-height: 44px; padding: 0 2px; }
+.services-toggle {
+  display: grid; place-items: center; width: 28px; height: 44px;
+  border: 0; border-radius: 6px; background: transparent; padding: 0;
+}
+.services-toggle svg { fill: none; stroke: currentColor; stroke-width: 1.5; transition: transform .15s; }
+.services-toggle[aria-expanded=true] svg { transform: rotate(180deg); }
+.services-nav.is-open > .services-link, .services-nav.is-open > .services-toggle { color: var(--teal); }
+.services-nav.is-open > .services-link { text-decoration: underline; text-underline-offset: 7px; }
+.services-toggle:hover { background: var(--pale); }
+.services-dropdown {
+  position: absolute; top: 100%; left: max(24px, 3vw); right: max(24px, 3vw);
+  max-height: calc(100dvh - 125px); overflow-y: auto; overscroll-behavior: contain;
+  padding: 28px 30px 30px; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 0 0 16px 16px;
+  box-shadow: 0 24px 40px #172e2b20; scrollbar-gutter: stable;
+}
+.services-menu-heading {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 22px;
+}
+.services-menu-heading strong { display: block; font-size: 23px; font-weight: 600; }
+.services-menu-heading p { font-size: 14px; font-weight: 400; color: var(--muted); line-height: 1.6; margin: 7px 0 0; }
+.services-catalog-link { display: flex; align-items: center; gap: 15px; padding: 12px 16px; border-radius: 24px; background: var(--pale); font-size: 14px; white-space: nowrap; }
+.services-menu-columns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px 26px; }
+.services-menu-group { min-width: 0; }
+.services-menu-group h2 { font-size: 16px; font-weight: 650; line-height: 1.45; letter-spacing: 0; margin: 0 0 12px; }
+.services-menu-group h2 a { display: flex; justify-content: space-between; gap: 8px; padding: 0 0 10px; border-bottom: 1px solid var(--line); }
+.services-menu-group h2 span { color: var(--teal); }
+.services-menu-group > a { display: block; font-size: 14px; font-weight: 400; line-height: 1.5; padding: 7px 9px; margin: 0 -9px; border-radius: 5px; overflow-wrap: anywhere; }
+.services-menu-group > a:hover, .services-menu-group > a:focus-visible { background: var(--pale); color: var(--teal); }
+.mobile-menu { font-size: 16px; font-weight: 400; line-height: 1.5; }
+.mobile-menu > a { min-height: 48px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.mobile-services > summary { padding: 13px 0; font-size: 17px; }
+.mobile-services summary > span { transform: none; }
+.mobile-services[open] > summary > span,
+.mobile-service-group[open] > summary > span { transform: rotate(45deg); }
+.mobile-catalog-link { font-size: 15px; font-weight: 600; }
+.mobile-service-group { margin-left: 8px; }
+.mobile-service-group > summary { font-size: 16px; padding: 14px 0; }
+.mobile-service-group > a { display: block; font-size: 15px; line-height: 1.55; padding: 12px 10px; margin: 0 0 0 6px; border-radius: 5px; }
+.mobile-service-group > a:hover, .mobile-service-group > a:focus-visible { background: var(--pale); }
+.mobile-service-group > .mobile-category-link { color: var(--teal); font-weight: 600; }
+
+@media (max-width: 1100px) {
+  header > nav { gap: 18px; }
+  .header-call { font-size: 14px; padding: 12px 17px; }
+}
+@media (max-width: 1000px) {
+  header > nav { display: none; }
+  .header-call { margin-left: auto; }
+  .menu-btn { display: block; background: transparent; border: 0; font-size: 25px; padding: 5px; }
+  .mobile-menu { display: block; top: 88px; max-height: calc(100dvh - 155px); overflow-y: auto; overscroll-behavior: contain; padding: 10px 26px 28px; border-bottom: 1px solid var(--line); }
+  .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  header { height: 76px; gap: 12px; }
+  .brand { font-size: 25px; }
+  .header-call { font-size: 13px; padding: 10px 14px; }
+  .demo-banner, .demo-banner span { font-size: 10px; }
+  .demo-banner { padding: 8px 20px; gap: 18px; }
+  .demo-banner span { max-width: 200px; }
+  .mobile-menu { top: 76px; }
+  .hero h1 { font-size: clamp(32px, 9vw, 42px); line-height: 1.15; }
+  .hero p { font-size: 17px; }
+  .hero .eyebrow { font-size: 11px; letter-spacing: .6px; }
+  .hero-bottom { font-size: 10px; letter-spacing: .3px; }
+  .hero-actions { flex-wrap: wrap; gap: 12px; }
+  .btn, .secondary { font-size: 15px; gap: 20px; padding: 14px 20px; }
+  .trustbar { font-size: 12px; line-height: 1.6; }
+  h2 { font-size: 34px; letter-spacing: -.025em; }
+  .page-title h1 { font-size: clamp(32px, 8vw, 42px); letter-spacing: -.025em; }
+  .category-grid { gap: 14px; }
+  .category-content { padding: 16px; }
+  .category h3 { font-size: 18px; }
+  .section-head { flex-wrap: wrap; align-items: flex-start; gap: 8px; }
+  .section-head .text-link { font-size: 15px; }
+  .price-rows > a { font-size: 15px; grid-template-columns: minmax(0, 1fr) auto 12px; gap: 12px; }
+  .price-rows b { font-size: 16px; }
+  .price-rows small { font-size: 13px; }
+  .large-price small { font-size: 16px; }
+  summary, .faq-section summary { font-size: 16px; }
+  .faq-section details > p { font-size: 16px; }
+  .filter-tabs button { font-size: 14px; padding: 10px 14px; }
+  .muted, #quiz label, legend, #quiz select { font-size: 15px; }
+  #quiz input:not([type=checkbox]), #quiz select, #quiz textarea { font-size: 16px; }
+  .sitemap { font-size: 15px; }
+  footer, footer > a:not(.brand) { font-size: 14px; }
+}
+@media (max-width: 520px) {
+  .category-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 390px) {
+  header { padding: 0 16px; gap: 8px; }
+  .header-call { font-size: 12px; padding: 10px 12px; }
+  .hero-actions .btn, .hero-actions .secondary { font-size: 14px; padding: 14px 16px; gap: 16px; }
+}
+@media (max-width: 360px) {
+  .header-call { font-size: 11px; padding: 10px 9px; }
+  .brand { font-size: 23px; gap: 7px; }
+}
+
+.section-label {
+  display: inline-block;
+  color: var(--teal);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+}
