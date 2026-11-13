@@ -10,7 +10,6 @@ const serviceList = quiz.querySelector('#service-options');
 const serviceEmpty = quiz.querySelector('#service-empty');
 const serviceOptions = [...serviceList.children];
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const smallScreen = window.matchMedia('(max-width: 760px)');
 
 function normalizeService(value) {
   return value.trim().toLocaleLowerCase('ru').replaceAll('ё', 'е');
@@ -225,46 +224,10 @@ document.addEventListener('keydown',event=>{
 document.addEventListener('pointerdown',event=>{if(!servicesNav.contains(event.target))setServicesOpen(false);});
 desktopNavigation.addEventListener('change',()=>{setServicesOpen(false);setMobileMenu(false);});
 
-// The same local artwork is split into mountain and foreground planes.
-// Scroll events schedule one frame only while the first screen is visible.
-const hero=document.querySelector('.hero');
-const mountains=hero?.querySelector('.hero-mountains');
-const city=hero?.querySelector('.hero-city');
-let heroFrame=0,heroVisible=true;
-function paintHero(){
-  heroFrame=0;
-  if(!hero||!mountains||!city)return;
-  if(reducedMotion.matches){mountains.style.transform='';city.style.transform='';hero.classList.remove('has-parallax');return;}
-  const rect=hero.getBoundingClientRect();
-  if(rect.bottom<0||rect.top>window.innerHeight)return;
-  const travel=Math.min(Math.max(0,hero.offsetTop-rect.top),rect.height);
-  const mountainShift=Math.min(smallScreen.matches?12:48,travel*(smallScreen.matches?0.045:0.14));
-  const cityShift=Math.min(smallScreen.matches?3:10,travel*.025);
-  mountains.style.transform=`translate3d(0,${mountainShift.toFixed(2)}px,0)`;
-  city.style.transform=`translate3d(0,${cityShift.toFixed(2)}px,0)`;
-  hero.classList.add('has-parallax');
-}
-function requestHeroFrame(){if(hero&&!heroFrame&&heroVisible&&!document.hidden)heroFrame=requestAnimationFrame(paintHero);}
-if(hero){
-  window.addEventListener('scroll',requestHeroFrame,{passive:true});
-  window.addEventListener('resize',requestHeroFrame,{passive:true});
-  document.addEventListener('visibilitychange',requestHeroFrame);
-  if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{
-      heroVisible=entries[0].isIntersecting;
-      hero.classList.toggle('has-parallax',heroVisible&&!reducedMotion.matches);
-      if(heroVisible)requestHeroFrame();
-    });
-    observer.observe(hero);
-  }
-  requestHeroFrame();
-}
 reducedMotion.addEventListener('change',()=>{
   if(servicesAnimation){servicesAnimation.cancel();servicesAnimation=null;}
   servicesNav.classList.remove('is-animating');
   servicesDropdown.hidden=servicesToggle.getAttribute('aria-expanded')!=='true';
-  if(heroFrame){cancelAnimationFrame(heroFrame);heroFrame=0;}
-  paintHero();
 });
 let active='all';const search=document.querySelector('#price-search');function filterPrices(){const query=(search?.value||'').toLocaleLowerCase('ru').trim();let total=0;document.querySelectorAll('.price-group').forEach(group=>{let count=0;group.querySelectorAll('.price-rows>a').forEach(row=>{const visible=(active==='all'||group.dataset.group===active)&&row.textContent.toLocaleLowerCase('ru').includes(query);row.hidden=!visible;if(visible)count++;});group.hidden=count===0;total+=count;});const empty=document.querySelector('#no-results');if(empty)empty.hidden=total>0;}
 search?.addEventListener('input',filterPrices);document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{active=button.dataset.filter;document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b===button));filterPrices();}));

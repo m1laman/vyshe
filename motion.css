@@ -1,12 +1,5 @@
 /* Motion is confined to decorative layers; the text never scrolls separately. */
 :root { --motion-ease: cubic-bezier(.22, 1, .36, 1); }
-.hero { background-position: center; }
-.hero-scene {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: -2;
-}
-.hero.has-parallax .hero-mountains,
-.hero.has-parallax .hero-city { will-change: transform; }
 .services-dropdown { transform-origin: top center; }
 .services-toggle svg { transition: transform 240ms var(--motion-ease); }
 .services-nav.is-animating .services-dropdown { will-change: transform, opacity; }
@@ -76,7 +69,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-mountains, .hero-city { transform: none !important; will-change: auto !important; }
   .category, .project, .category-photo img, .project-photo, .project-info > span { transform: none !important; }
   .services-dropdown { transform: none !important; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
