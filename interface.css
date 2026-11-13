@@ -281,3 +281,6 @@ footer > div > a:not(.brand) { margin: 10px 0; }
   .header-search, .header-search-pill, header > nav { transition: none; }
   #site-search-panel { animation: none; }
 }
+
+/* Shared two-line company wordmark. */
+.brand{flex-shrink:0;gap:9px;letter-spacing:0}.brand .brand-name{display:flex;flex-direction:column;gap:0;font-size:17px;font-weight:800;line-height:1.08;letter-spacing:-.45px;text-transform:uppercase}.brand .brand-name span{display:block}footer .brand .brand-name{font-size:19px}@media(min-width:1001px) and (max-width:1150px){header .brand .brand-name{font-size:15px}header .brand img{width:30px;height:30px}header .brand{gap:6px}header>.header-search{--search-width:180px}}@media(max-width:600px){header .brand .brand-name{font-size:13px}header .brand img{width:28px;height:28px}header .brand{gap:6px}}
