@@ -1,6 +1,5 @@
 (() => {
   const search = document.querySelector('.header-search');
-  const header = search.closest('header');
   const toggle = search.querySelector('[data-site-search]');
   const panel = search.querySelector('#site-search-panel');
   const input = search.querySelector('#site-search-input');
@@ -27,27 +26,32 @@
 
   function closeSearch(restoreFocus = false) {
     search.classList.remove('is-open');
-    header.classList.remove('search-is-open');
     toggle.setAttribute('aria-expanded', 'false');
-    input.hidden = panel.hidden = true;
-    search.querySelector('[data-search-close]').hidden = true;
+    panel.hidden = true;
+    search.querySelector('[data-search-close]').hidden = !input.value;
     if (restoreFocus) toggle.focus({ preventScroll: true });
   }
-  toggle.addEventListener('click', () => {
+  function openSearch() {
     if (!search.classList.contains('is-open')) {
       document.querySelector('.services-toggle[aria-expanded="true"]')?.click();
       document.querySelector('.menu-btn[aria-expanded="true"]')?.click();
-      input.value = '';
       filter();
-      input.hidden = panel.hidden = false;
+      panel.hidden = false;
       search.querySelector('[data-search-close]').hidden = false;
       search.classList.add('is-open');
-      header.classList.add('search-is-open');
       toggle.setAttribute('aria-expanded', 'true');
     }
+  }
+  toggle.addEventListener('click', () => {
+    openSearch();
     input.focus({ preventScroll: true });
   });
-  search.querySelector('[data-search-close]').addEventListener('click', () => closeSearch(true));
+  input.addEventListener('focus', openSearch);
+  search.querySelector('[data-search-close]').addEventListener('click', () => {
+    input.value = '';
+    filter();
+    closeSearch(true);
+  });
   search.addEventListener('keydown', event => {
     if (event.key !== 'Escape' || event.isComposing) return;
     event.preventDefault();
@@ -60,7 +64,7 @@
   search.addEventListener('focusout', event => {
     if (event.relatedTarget && !search.contains(event.relatedTarget)) closeSearch();
   });
-  input.addEventListener('input', filter);
+  input.addEventListener('input', () => { openSearch(); filter(); });
   input.addEventListener('keydown', event => {
     if (event.isComposing) return;
     const links = visibleLinks();
